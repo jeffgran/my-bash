@@ -5,6 +5,7 @@ source $HOME/my-bash/.bash_colors
 export JAVA_TOOL_OPTIONS='-Xmx4G'
 
 export TERM=xterm-256color
+export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
 source ~/my-bash/.aliases

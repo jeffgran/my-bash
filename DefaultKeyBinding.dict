@@ -1,4 +1,4 @@
-// $ ln -s ~/my-bash/DefaultKeyBinding.dict Library/KeyBindings/DefaultKeyBinding.dict
+// $ ln -s ~/my-bash/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 // $ defaults write -g NSTextKillRingSize -string 12
 // $ defaults write -g NSRepeatCountBinding -string "^u"
 
@@ -7,14 +7,34 @@
   "^j" = (moveBackward:);
   "^'" = (moveWordForward:);
   "^h" = (moveWordBackward:);
-
+  
+  
+  "^ " = "setMark:";
+  "^@ " = "selectToMark:";
+  "@ " = "selectWord:";
+  
+  
   "^H" = (moveWordBackwardAndModifySelection:);
   "^\"" = (moveWordForwardAndModifySelection:);
+  
+  
+  
+  "^@n" = "scrollPageDown:";
+  "^@p" = "scrollPageUp:";
+  
 
-  "@ " = (selectWord:);
+  "@<" = "scrollToBeginningOfDocument:";
+  "@>" = "scrollToEndOfDocument:";
+
+
+  "~4" = "performMiniaturize:";
+  
+  
+
 
   // command-delete (backspace)
   "@\U007F" = (deleteWordBackward:);
+  "@k" = (moveToBeginningOfLine:, deleteToEndOfLine:);
 
   "^s" = (save:);
   "^x" = (cut:);
@@ -24,7 +44,7 @@
   "^v" = (yankAndSelect:);
 
 
-  "^@s" = {   // Surround commands
+  "@s" = {   // Surround commands
     // wrap () with spaces
     "(" = (delete:, insertText:, "( ", yank:, insertText:, " ", moveLeft:, insertText:, " )", deleteForward:);
     // wrap () no spaces

@@ -7,6 +7,7 @@ alias add='git add -uv'
 alias stat='git status'
 alias comit='git commit'
 alias co='git checkout'
+alias gs="git show"
 alias gdif='git diff'
 alias gdifc='git diff --cached'
 alias gdifw='git diff --color-words'
@@ -18,3 +19,20 @@ alias glog='git log --oneline --decorate'
 alias gmg='git merge'
 alias add='git add -A ${1}'
 alias story='git checkout -b $1; git push -u origin/$1'
+
+
+alias be="bundle exec"
+
+# function story() {
+#     git checkout -b $1
+#     git push -u origin $1
+# }
+
+
+#alias jv="JAVA_HOME=$(/usr/libexec/java_home -v ${1})"
+function jv(){
+    local v="$1"
+    local home=$(/usr/libexec/java_home -v $v)
+    export JAVA_HOME=$home
+    echo $JAVA_HOME
+}
