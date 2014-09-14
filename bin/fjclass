@@ -1,0 +1,4 @@
+#!/bin/sh
+# usage: $ fjclass ./vendor CoprocessorProtocol
+# finds the CoprocessorProtocol class in any jars in ./vendor
+find "$1" -name "*.jar" -exec sh -c 'jar -tf {}|grep -H --label {} '$2'' \;
