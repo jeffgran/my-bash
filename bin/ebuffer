@@ -1,0 +1,9 @@
+if [ -z "$1" ]
+then
+    TMP="$(mktemp /tmp/___stdin-XXX)"
+    cat >$TMP
+    emacsclient -t -n -a emacs $TMP
+    rm $TMP
+else
+    emacsclient -t -n -a '' "$@"
+fi

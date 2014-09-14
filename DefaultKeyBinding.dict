@@ -1,0 +1,51 @@
+// $ ln -s ~/my-bash/DefaultKeyBinding.dict Library/KeyBindings/DefaultKeyBinding.dict
+// $ defaults write -g NSTextKillRingSize -string 12
+// $ defaults write -g NSRepeatCountBinding -string "^u"
+
+{
+  "^;" = (moveForward:);
+  "^j" = (moveBackward:);
+  "^'" = (moveWordForward:);
+  "^h" = (moveWordBackward:);
+
+  "^H" = (moveWordBackwardAndModifySelection:);
+  "^\"" = (moveWordForwardAndModifySelection:);
+
+  "@ " = (selectWord:);
+
+  // command-delete (backspace)
+  "@\U007F" = (deleteWordBackward:);
+
+  "^s" = (save:);
+  "^x" = (cut:);
+  "^c" = (copy:);
+
+  // kill ring paste
+  "^v" = (yankAndSelect:);
+
+
+  "^@s" = {   // Surround commands
+    // wrap () with spaces
+    "(" = (delete:, insertText:, "( ", yank:, insertText:, " ", moveLeft:, insertText:, " )", deleteForward:);
+    // wrap () no spaces
+    ")" = (delete:, insertText:, "( ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, ")", deleteForward:);
+    // wrap [] with spaces
+    "[" = (delete:, insertText:, "[ ", yank:, insertText:, " ", moveLeft:, insertText:, " ]", deleteForward:);
+    // wrap [] no spaces
+    "]" = (delete:, insertText:, "[ ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "]", deleteForward:);
+    // wrap {} with spaces
+    "{" = (delete:, insertText:, "{ ", yank:, insertText:, " ", moveLeft:, insertText:, " }", deleteForward:);
+    // wrap {} no spaces
+    "}" = (delete:, insertText:, "{ ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "}", deleteForward:);
+    // wrap <> with spaces
+    "<" = (delete:, insertText:, "< ", yank:, insertText:, " ", moveLeft:, insertText:, " >", deleteForward:);
+    // wrap <> no spaces
+    ">" = (delete:, insertText:, "< ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, ">", deleteForward:);
+    // wrap single quotes
+    "'" = (delete:, insertText:, "' ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "'", deleteForward:);
+    // wrap backticks
+    "`" = (delete:, insertText:, "` ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "`", deleteForward:);
+    // wrap double quote
+    "\"" = (delete:, insertText:, "\" ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "\"", deleteForward:);
+  };
+}
