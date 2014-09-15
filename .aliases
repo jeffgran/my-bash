@@ -36,3 +36,5 @@ function jv(){
     export JAVA_HOME=$home
     echo $JAVA_HOME
 }
+
+alias rbgems="echo '.gems' > .rbenv-gemsets"

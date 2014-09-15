@@ -4,7 +4,9 @@
 
 {
   "^;" = (moveForward:);
+  "^:" = (moveForwardAndModifySelection:);
   "^j" = (moveBackward:);
+  "^J" = (moveBackwardAndModifySelection:);
   "^'" = (moveWordForward:);
   "^h" = (moveWordBackward:);
   
@@ -14,10 +16,20 @@
   "@ " = "selectWord:";
   
   
+  "@a" = (moveToEndOfLine:, moveToBeginningOfLineAndModifySelection:);
+  "@e" = (selectParagraph:);
+
+  
+  
   "^H" = (moveWordBackwardAndModifySelection:);
   "^\"" = (moveWordForwardAndModifySelection:);
+  "^N" = (moveDownAndModifySelection:);
+  "^P" = (moveUpAndModifySelection:);
   
-  
+  // move line up
+  "@p" = (selectParagraph:, setMark:, deleteToMark:, moveLeft:, moveToBeginningOfParagraph:, yank:, moveLeft:, selectToMark:, moveLeft:);
+  // move line down
+  "@n" = (selectParagraph:, setMark:, deleteToMark:, moveToEndOfParagraph:, moveRight:, setMark:, yank:, moveLeft:, selectToMark:);
   
   "^@n" = "scrollPageDown:";
   "^@p" = "scrollPageUp:";
@@ -34,15 +46,20 @@
 
   // command-delete (backspace)
   "@\U007F" = (deleteWordBackward:);
-  "@k" = (moveToBeginningOfLine:, deleteToEndOfLine:);
+  "@k" = (selectParagraph:, delete:);
 
   "^s" = (save:);
-  "^x" = (cut:);
-  "^c" = (copy:);
+  
+  
+  "^x" = (setMark:, deleteToMark:, yankAndSelect:, cut:);
+  "^c" = (setMark:, copy:, deleteToMark:, yankAndSelect:);
 
   // kill ring paste
   "^v" = (yankAndSelect:);
-
+  //yank into clipboard
+  "^y" = (yankAndSelect:, cut:);
+  
+  "^z" = undo:;
 
   "@s" = {   // Surround commands
     // wrap () with spaces
