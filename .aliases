@@ -18,14 +18,15 @@ alias push='git push'
 alias glog='git log --oneline --decorate'
 alias gmg='git merge'
 alias add='git add -A ${1}'
+alias story='git checkout -b $1; git push -u origin/$1'
 
 
 alias be="bundle exec"
 
-function story() {
-    git checkout -b $1
-    git push -u origin $1
-}
+# function story() {
+#     git checkout -b $1
+#     git push -u origin $1
+# }
 
 
 #alias jv="JAVA_HOME=$(/usr/libexec/java_home -v ${1})"
@@ -36,27 +37,4 @@ function jv(){
     echo $JAVA_HOME
 }
 
-
-
-
-
 alias rbgems="echo '.gems' > .rbenv-gemsets"
-
-
-function master() {
-    export RBENV_GEMSETS=".mastergems";
-    bundle;
-    bundle clean --force;
-    rbenv rehash;
-    RAILS_ENV=test rake db:drop db:create db:schema:load db:migrate;
-    RAILS_ENV=development rake db:drop db:create db:schema:load db:migrate;
-}
-
-function lsmaster() {
-    export RBENV_GEMSETS=".gems";
-    bundle;
-    bundle clean --force;
-    rbenv rehash;
-    RAILS_ENV=test rake db:drop db:create db:schema:load db:migrate;
-    RAILS_ENV=development rake db:drop db:create db:schema:load db:migrate;
-}

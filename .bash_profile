@@ -1,4 +1,4 @@
-export PATH=$HOME/my-bash/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=$HOME/my-bash/bin:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 source $HOME/my-bash/.bash_colors
@@ -45,3 +45,16 @@ export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] "'$(__git_ps1 "\[\033
 
 # helps with building stuff using cairo
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
+
+export DATABASE_URL=postgres:///$(whoami)
+
+# set default docker-machine
+eval "$(docker-machine env default)"
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
