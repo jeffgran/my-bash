@@ -25,9 +25,32 @@ function hs {
     grep $1 $HISTFILE
 }
 
+
 # for the git_ps1 prompt thing below
-if [ -f `brew --prefix`/etc/bash_completion.d/git-prompt.sh ]; then
-    . `brew --prefix`/etc/bash_completion.d/git-prompt.sh
+if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+
+    # Set config variables first
+    GIT_PROMPT_ONLY_IN_REPO=0
+
+    GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+
+    # GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
+    GIT_PROMPT_SHOW_UNTRACKED_FILES=no # can be no, normal or all; determines counting of untracked files
+
+    # GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
+
+    # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+    # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
+
+    # as last entry source the gitprompt script
+    # GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
+    # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+    # GIT_PROMPT_THEME=Default
+
+    Time12a="\$(date +%H:%M)"
+    PathShort="\w"
+    #GIT_PROMPT_END_USER=" ${White}${ResetColor} $ "
+    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 
 # prompt with ruby version
@@ -38,18 +61,17 @@ __rbenv_ps1 ()
     printf $rbenv_ruby_version
 }
 
-#export PATH=$PATH:$HOME/.cabal/bin:$HOME/.bash
+
+# OLD custom bash prompt, keeping for posterity
 #export PS1="\w $ "
-export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] "'$(__git_ps1 "\[\033[0;36m\][%s]\[\033[0m\]")'" \w/$ "
+#export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] "'$(__git_ps1 "\[\033[0;36m\][%s]\[\033[0m\]")'" \w/$ "
+#export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] \w/$ "
 
 
 # helps with building stuff using cairo
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
 
 export DATABASE_URL=postgres:///$(whoami)
-
-# set default docker-machine
-eval "$(docker-machine env default)"
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
@@ -58,3 +80,6 @@ fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# trelora - set up default docker env or something
+eval "$(docker-machine env default)"
