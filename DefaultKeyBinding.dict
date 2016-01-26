@@ -3,8 +3,8 @@
 // $ defaults write -g NSRepeatCountBinding -string "^u"
 
 {
-  "^;" = (moveForward:);
-  "^:" = (moveForwardAndModifySelection:);
+  "^l" = (moveForward:);
+  "^L" = (moveForwardAndModifySelection:);
   "^j" = (moveBackward:);
   "^J" = (moveBackwardAndModifySelection:);
   "^'" = (moveWordForward:);
