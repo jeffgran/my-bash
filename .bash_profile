@@ -82,12 +82,5 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-# export RAILS_RESQUE_REDIS=redis://$(docker-machine ip default):6379
-export RAILS_RESQUE_REDIS=redis://127.0.0.1:6379
-
-# trelora - set APP_HOME for compat with the docker-based setup
-export APP_HOME=/Users/jgran/dev/gpigs-core
