@@ -27,7 +27,8 @@ function hs {
 
 
 # for the git_ps1 prompt thing below
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+if [ -f /usr/local/share/gitprompt.sh ]; then
+    # GIT_PROMPT_THEME=Default
 
     # Set config variables first
     GIT_PROMPT_ONLY_IN_REPO=0
@@ -49,9 +50,13 @@ if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
 
     Time12a="\$(date +%H:%M)"
     PathShort="\w"
-    #GIT_PROMPT_END_USER=" ${White}${ResetColor} $ "
-    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+    GIT_PROMPT_START_USER="${Yellow}${PathShort}${White} (${Red}\$(__rbenv_ps1)${White})"
+    #GIT_PROMPT_END_USER="${GIT_PROMPT_END} ${White}${ResetColor} ${PathShort} $ "
+    # GIT_PROMPT_END="${GIT_PROMPT_END} ${White}${ResetColor} ${PathShort} $ "
+
+    . /usr/local/share/gitprompt.sh
 fi
+
 
 # prompt with ruby version
 # rbenv version | sed -e 's/ .*//'
@@ -81,5 +86,8 @@ fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# trelora - set up default docker env or something
-eval "$(docker-machine env default)"
+# export RAILS_RESQUE_REDIS=redis://$(docker-machine ip default):6379
+export RAILS_RESQUE_REDIS=redis://127.0.0.1:6379
+
+# trelora - set APP_HOME for compat with the docker-based setup
+export APP_HOME=/Users/jgran/dev/gpigs-core
