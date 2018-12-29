@@ -4,7 +4,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 source $HOME/my-bash/.bash_colors
 export JAVA_TOOL_OPTIONS='-Xmx4G'
 
-export TERM=xterm-256color
+export TERM=ansi
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
