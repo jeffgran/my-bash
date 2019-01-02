@@ -1,5 +1,5 @@
 // $ mkdir -p ~/Library/KeyBindings
-// $ ln -s ~/my-bash/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
+// $ cp ~/my-bash/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 // $ defaults write -g NSTextKillRingSize -string 12
 // $ defaults write -g NSRepeatCountBinding -string "^u"
 
@@ -8,25 +8,22 @@
   "^L" = (moveForwardAndModifySelection:);
   "^j" = (moveBackward:);
   "^J" = (moveBackwardAndModifySelection:);
-  "^'" = (moveWordForward:);
+  "^;" = (moveWordForward:);
+  "^:" = (moveWordForwardAndModifySelection:);
   "^h" = (moveWordBackward:);
-  
-  
+  "^H" = (moveWordBackwardAndModifySelection:);
+
+  "^N" = (moveDownAndModifySelection:);
+  "^P" = (moveUpAndModifySelection:);
+
   "^ " = "setMark:";
   "^@ " = "selectToMark:";
   "@ " = "selectWord:";
-  
-  
+
+
   "@a" = (moveToEndOfLine:, moveToBeginningOfLineAndModifySelection:);
   "@e" = (selectParagraph:);
 
-  
-  
-  "^H" = (moveWordBackwardAndModifySelection:);
-  "^\"" = (moveWordForwardAndModifySelection:);
-  "^N" = (moveDownAndModifySelection:);
-  "^P" = (moveUpAndModifySelection:);
-  
   // move line up
   "@p" = (selectParagraph:, setMark:, deleteToMark:, moveLeft:, moveToBeginningOfParagraph:, yank:, moveLeft:, selectToMark:, moveLeft:);
   // move line down
@@ -41,16 +38,11 @@
 
 
   "~4" = "performMiniaturize:";
-  
-  
-
 
   // command-delete (backspace)
   "@\U007F" = (deleteWordBackward:);
   "@k" = (selectParagraph:, delete:);
 
-  "^s" = (save:);
-  
   
   "^x" = (setMark:, deleteToMark:, yankAndSelect:, cut:);
   "^c" = (setMark:, copy:, deleteToMark:, yankAndSelect:);
@@ -60,7 +52,6 @@
   //yank into clipboard
   "^y" = (yankAndSelect:, cut:);
   
-  "^z" = undo:;
 
   "@s" = {   // Surround commands
     // wrap () with spaces

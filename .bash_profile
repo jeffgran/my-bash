@@ -4,7 +4,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 source $HOME/my-bash/.bash_colors
 export JAVA_TOOL_OPTIONS='-Xmx4G'
 
-export TERM=xterm-256color
+export TERM=ansi
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
@@ -80,10 +80,9 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:~/Library/Python/3.6/bin:$PATH"
 
-source ~/my-bash/.letoterc
+export PATH="/usr/local/heroku/bin:$PATH"
+[ -e ~/my-bash/.letoterc ] && source ~/my-bash/.letoterc
 
 export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-01-a.xctoolchain/
