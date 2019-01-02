@@ -1,4 +1,4 @@
-export PATH=$HOME/my-bash/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/my-bash/bin:$HOME/.yarn-global/bin:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 source $HOME/my-bash/.bash_colors
@@ -76,18 +76,14 @@ __rbenv_ps1 ()
 # helps with building stuff using cairo
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
 
-export DATABASE_URL=postgres:///$(whoami)
-
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/heroku/bin:~/Library/Python/3.6/bin:$PATH"
 
-# export RAILS_RESQUE_REDIS=redis://$(docker-machine ip default):6379
-export RAILS_RESQUE_REDIS=redis://127.0.0.1:6379
+source ~/my-bash/.letoterc
 
-# trelora - set APP_HOME for compat with the docker-based setup
-export APP_HOME=/Users/jgran/dev/gpigs-core
+export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-01-a.xctoolchain/

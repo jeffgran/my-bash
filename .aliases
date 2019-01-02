@@ -7,6 +7,8 @@ alias add='git add -uv'
 alias stat='git status'
 alias comit='git commit'
 alias co='git checkout'
+alias com='git checkout master'
+alias cod='git checkout develop'
 alias gs="git show"
 alias gdif='git diff'
 alias gdifc='git diff --cached'
@@ -38,3 +40,5 @@ function jv(){
 }
 
 alias rbgems="echo '.gems' > .rbenv-gemsets"
+
+alias fixcamera="sudo killall AppleCameraAssistant; sudo killall VDCAssistant"
