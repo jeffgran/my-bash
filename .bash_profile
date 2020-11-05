@@ -1,14 +1,17 @@
-export PATH=$HOME/.cargo/bin:$HOME/my-bash/bin:$HOME/.yarn-global/bin:$PATH
+DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
+SYMDIR="$(cd $(dirname "$(readlink "${BASH_SOURCE[0]}")") && pwd)"
+
+export PATH=$HOME/.cargo/bin:$DIR/bin:$HOME/.yarn-global/bin:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-source $HOME/my-bash/.bash_colors
 export JAVA_TOOL_OPTIONS='-Xmx4G'
 
 export TERM=ansi
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
-source ~/my-bash/.aliases
+source $SYMDIR/.bash_colors
+source $SYMDIR/.aliases
 
 
 
@@ -83,6 +86,6 @@ fi
 ### Added by the Heroku Toolbelt
 
 export PATH="/usr/local/heroku/bin:$PATH"
-[ -e ~/my-bash/.letoterc ] && source ~/my-bash/.letoterc
+[ -e $DIR/.letoterc ] && source $DIR/.letoterc
 
 export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-01-a.xctoolchain/
