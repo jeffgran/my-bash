@@ -90,3 +90,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 [ -e $SYMDIR/.doxrc ] && source $SYMDIR/.doxrc
 
 export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-01-a.xctoolchain/
+
+export PATH="$HOME/.cask/bin:$PATH"
