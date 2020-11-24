@@ -22,16 +22,11 @@ alias gmg='git merge'
 alias add='git add -A ${1}'
 alias story='git checkout -b $1; git push -u origin/$1'
 
-
+alias tf="terraform"
+alias ave="aws-vault exec"
 alias be="bundle exec"
 
-# function story() {
-#     git checkout -b $1
-#     git push -u origin $1
-# }
 
-
-#alias jv="JAVA_HOME=$(/usr/libexec/java_home -v ${1})"
 function jv(){
     local v="$1"
     local home=$(/usr/libexec/java_home -v $v)

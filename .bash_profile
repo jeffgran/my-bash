@@ -86,6 +86,7 @@ fi
 ### Added by the Heroku Toolbelt
 
 export PATH="/usr/local/heroku/bin:$PATH"
-[ -e $DIR/.letoterc ] && source $DIR/.letoterc
+[ -e $SYMDIR/.letoterc ] && source $SYMDIR/.letoterc
+[ -e $SYMDIR/.doxrc ] && source $SYMDIR/.doxrc
 
 export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-01-a.xctoolchain/
