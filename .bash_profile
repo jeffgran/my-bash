@@ -1,7 +1,8 @@
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
 SYMDIR="$(cd $(dirname "$(readlink "${BASH_SOURCE[0]}")") && pwd)"
 
-export PATH=$HOME/.cargo/bin:$DIR/bin:$HOME/.yarn-global/bin:$PATH
+export GOPATH=$HOME/go
+export PATH=$(brew --prefix)/opt/python@3.9/libexec/bin:$HOME/.cargo/bin:$DIR/bin:$HOME/.yarn-global/bin:$HOME/go/bin:$SYMDIR/bin:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export JAVA_TOOL_OPTIONS='-Xmx4G'
@@ -9,21 +10,40 @@ export JAVA_TOOL_OPTIONS='-Xmx4G'
 export TERM=ansi
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
+export LANG=en_US.UTF-8
 
 source $SYMDIR/.bash_colors
 source $SYMDIR/.aliases
 
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+# bash completion (brew install bash-completion)
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # history stuff
-HISTSIZE=2222
-HISTFILESIZE=999999
-HISTTIMEFORMAT="%Y%m%d-%T "
-HISTIGNORE="&:pwd:ls:[bf]g:exit:[ \t]*"
+export HISTSIZE=2222
+export HISTFILESIZE=999999
+export HISTTIMEFORMAT="%Y%m%d-%T "
+export HISTIGNORE="&:pwd:ls:[bf]g:exit:[ \t]*"
+export HISTCONTROL=ignoreboth
 shopt -s cmdhist
 shopt -s histappend
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# If there are multiple matches for completion, Tab should cycle through them
+bind 'TAB':menu-complete
+
+# Display a list of the matching files
+bind "set show-all-if-ambiguous on"
+
+# Perform partial completion on the first Tab press,
+# only start cycling full results on the second Tab press
+bind "set menu-complete-display-prefix on"
+
+
+export PROMPT_COMMAND='history -a; history -c; history -r;'"$PROMPT_COMMAND"
 function hs {
     grep $1 $HISTFILE
 }
