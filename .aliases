@@ -1,4 +1,4 @@
-alias ls='ls -GAF'
+alias ls='ls -GAF --color=auto'
 alias ll='ls -l'
 
 alias less='less -R'
