@@ -21,19 +21,7 @@ alias glog='git log --oneline --decorate'
 alias gmg='git merge'
 alias add='git add -A ${1}'
 alias story='git checkout -b $1; git push -u origin/$1'
-
+alias shad='ssh-add -t 28800 ~/.ssh/id_ed25519_github'
 alias tf="terraform"
 alias ave="aws-vault exec"
 alias be="bundle exec"
-
-
-function jv(){
-    local v="$1"
-    local home=$(/usr/libexec/java_home -v $v)
-    export JAVA_HOME=$home
-    echo $JAVA_HOME
-}
-
-alias rbgems="echo '.gems' > .rbenv-gemsets"
-
-alias fixcamera="sudo killall AppleCameraAssistant; sudo killall VDCAssistant"
