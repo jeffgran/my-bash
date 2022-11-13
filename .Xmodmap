@@ -1,0 +1,34 @@
+! this is a comment
+! This file lets us use R-Alt as the Hyper key, while leaving the L-Alt key as Alt
+! Place this file at ~/.Xmodmap
+! It will automatically get picked up on login. To run it for the first time, `xmodmap ~/.Xmodmap`
+
+
+
+! clear the alt completely
+! (unassign Alt_R from being understood as Alt)
+clear mod1
+! clear the super/hyper completely
+! (By default Super and Hyper are both understood as Super, which is mod4. We want to remove Hyper_R from being undrstood as Super)
+clear mod4
+! clear mod3 - it is empty by default but this makes this idempotent
+clear mod3
+
+
+
+! The keycode 108 (which is what my R_Alt key sends) is understood as Hyper_R
+keycode 108 = Hyper_R
+
+! Hyper_R (which now includes keycode 108 which is my physical Alt_R key) is mod3, a different modifier. By default mod3 is blank
+add mod3 = Hyper_R
+add mod4 = Super_L Hyper_L Super_R
+add mod1 = Alt_L Meta_L
+
+
+! clear capslock and control to remap capslock to control
+! from https://wiki.archlinux.org/title/xmodmap#Turn_CapsLock_into_Control
+clear lock
+clear control
+! map 66 (capslock physical key) as a control key then reassign control to be interpreted as control
+keycode 66 = Control_L
+add control = Control_L Control_R
