@@ -14,9 +14,17 @@ source $SYMDIR/.bash_colors
 source $SYMDIR/.aliases
 
 
+ulimit -n 8192
+
+# darwin
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# linux
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bash completion (brew install bash-completion)
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
@@ -94,6 +102,15 @@ __rbenv_ps1 ()
 #export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] \w/$ "
 
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.tfenv/bin:$HOME/go/bin:$PATH"
 
-[ -e $SYMDIR/.doxrc ] && source $SYMDIR/.doxrc
+[ -e $SYMDIR/.doxrc.sh ] && source $SYMDIR/.doxrc.sh
+
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+
+if [ -e /home/jgran/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jgran/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+#guix
+GUIX_PROFILE="/home/jgran/.config/guix/current"
+. "$GUIX_PROFILE/etc/profile"
+export PATH="/home/jgran/.guix-profile/bin:$PATH"

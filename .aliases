@@ -21,7 +21,25 @@ alias glog='git log --oneline --decorate'
 alias gmg='git merge'
 alias add='git add -A ${1}'
 alias story='git checkout -b $1; git push -u origin/$1'
-alias shad='ssh-add -t 28800 ~/.ssh/id_ed25519_github'
 alias tf="terraform"
 alias ave="aws-vault exec"
 alias be="bundle exec"
+alias archive='shopt -s dotglob; tar -czvf "$(basename $(pwd)).tar.gz" ./*; shopt -u dotglob'
+
+alias keystart="sudo systemctl restart keyszer"
+
+alias ruby-build-upgrade='git -C "$(rbenv root)"/plugins/ruby-build pull'
+
+function reload_gtk_theme() {
+  theme=$(gsettings get org.gnome.desktop.interface gtk-theme)
+  gsettings set org.gnome.desktop.interface gtk-theme ''
+  sleep 1
+  gsettings set org.gnome.desktop.interface gtk-theme $theme
+}
+
+## ssh add
+function shad() {
+    hours=${1:-8}
+    seconds=$(( $hours * 60 * 60 ))
+    ssh-add -t $seconds ~/.ssh/id_ed25519_github
+}
