@@ -1,0 +1,17 @@
+[Unit]
+Description=keyszer
+
+[Service]
+Type=simple
+User=keymapper
+Group=input
+KillMode=process
+ExecStart=/home/keymapper/.local/bin/keyszer -c /home/jgran/.config/keyszer/config.py
+ExecStartPost=/home/jgran/xmodmap.sh
+ExecStop=/usr/bin/sudo /usr/bin/killall keyszer
+Restart=on-failure
+RestartSec=3
+Environment=DISPLAY=:1
+
+[Install]
+WantedBy=graphical.target
