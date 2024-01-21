@@ -11,6 +11,9 @@
 #     Key.RIGHT_SHIFT: [Key.KPRIGHTPAREN, Key.RIGHT_SHIFT]
 # }, when = lambda ctx: ctx.device_name.startswith("Microsoft"))
 
+modmap("caps as control", {
+    Key.CAPSLOCK: Key.LEFT_CTRL
+})
 
 # Keybindings for Firefox
 keymap("Firefox", {
