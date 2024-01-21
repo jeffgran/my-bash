@@ -41,7 +41,11 @@ keymap("Firefox", {
     # find
     C("Alt-f"): C("C-f"),
     C("Alt-g"): C("C-g"),
-    C("Alt-Shift-f"): C("C-Shift-f")
+    C("Alt-Shift-f"): C("C-Shift-f"),
+    C("Alt-Shift-g"): C("C-Shift-g"),
+
+    # close
+    C("Alt-w"): C("C-w"),
 }, when = wm_class_match(r"firefox"))
 
 
