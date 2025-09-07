@@ -106,11 +106,8 @@ export PATH="$HOME/.local/bin:$HOME/.tfenv/bin:$HOME/go/bin:$PATH"
 
 [ -e $SYMDIR/.doxrc.sh ] && source $SYMDIR/.doxrc.sh
 
+[ -e $SYMDIR/.finorc.sh ] && source $SYMDIR/.finorc.sh
+
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
 if [ -e /home/jgran/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jgran/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-#guix
-GUIX_PROFILE="/home/jgran/.config/guix/current"
-. "$GUIX_PROFILE/etc/profile"
-export PATH="/home/jgran/.guix-profile/bin:$PATH"
