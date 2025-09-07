@@ -1,0 +1,156 @@
+modmap:
+  - name: Global
+    remap:
+      Capslock: Ctrl_L
+keymap:
+  - name: Firefox
+    application:
+      only: [firefox]
+    remap:
+      # # switch next/previous tab
+      Alt-Shift-rightbrace: C-Tab
+      Alt-Shift-leftbrace: C-Shift-Tab
+      # # forward/back
+      # C("Alt-right_brace"): C("C-right_brace"),
+      Alt-rightbrace: C-rightbrace
+      # C("Alt-left_brace"): C("C-left_brace"),
+      Alt-leftbrace: C-leftbrace
+
+      # # Type C-esc to focus to the content
+      # C("C-esc"): C("C-f6"),
+      C-esc: C-f6
+
+      # # alternative for C-k because that's in use by emacs kill line.
+      # # useful for "add link" in gdocs, e.g.
+      # C("C-Alt-k"): C("C-k"),
+      C-Alt-k: C-k
+
+      # # reload/tab keys
+      # C("Alt-r"): C("C-r"),
+      Alt-r: C-r
+      # C("Alt-Shift-r"): C("C-Shift-r"),
+      Alt-Shift-r: C-Shift-r
+      # C("Alt-t"): C("C-t"),
+      Alt-t: C-t
+      # C("Alt-Shift-t"): C("C-Shift-t"),
+      Alt-Shift-t: C-Shift-t
+      # C("C-t"): C("Alt-t"),
+      C-t: Alt-t
+
+      # # find
+      # C("Alt-f"): C("C-f"),
+      Alt-f: C-f
+      # C("Alt-g"): C("C-g"),
+      Alt-g: C-g
+      # C("Alt-Shift-f"): C("C-Shift-f"),
+      Alt-Shift-F: C-Shift-f
+      # C("Alt-Shift-g"): C("C-Shift-g"),
+      Alt-Shift-g: C-Shift-g
+
+      # # close
+      # C("Alt-w"): C("C-w"),
+      Alt-w: C-w
+
+  - name: Slack
+    application:
+      only: [Slack]
+    remap:
+      # Find
+      M-f: C-f
+      # Reload
+      M-r: C-r
+      # palette
+      M-k: C-k
+      # back and forward
+      C-comma: Alt-left
+      C-dot: Alt-right
+      # preferences
+      M-comma: C-comma
+
+      # edit last message with ctrl-shift-p
+      C-Shift-p: C-up
+  - name: NotEmacs
+    application:
+      not: [Emacs]
+    remap:
+      # Cursor
+      # C("C-j"): with_mark(C("left")),
+      C-j: { with_mark: left }
+      # C("Alt-j"): C("C-j"),
+      M-j: { with_mark: C-j }
+      # C("C-l"): with_mark(C("right")),
+      C-l: { with_mark: right }
+      # C("Alt-l"): C("C-l"),
+      M-l: C-l
+      # C("C-p"): with_mark(C("up")),
+      C-p: { with_mark: up }
+      # C("Alt-p"): C("C-p"),
+      M-p: C-p
+      # C("C-n"): with_mark(C("down")),
+      C-n: { with_mark: down }
+      # C("Alt-n"): C("C-n"),
+      M-n: C-n
+      # # Forward/Backward word
+      # C("C-h"): with_mark(C("C-left")),
+      C-h: { with_mark: C-left }
+      # C("Alt-h"): C("C-h"),
+      M-h: C-h
+      # C("C-semicolon"): with_mark(C("C-right")),
+      C-semicolon: { with_mark: C-right }
+      # # Beginning/End of line
+      # C("C-a"): with_mark(C("home")),
+      C-a: { with_mark: home }
+      # C("Alt-a"): C("C-a"),
+      M-a: C-a
+      # C("C-e"): with_mark(C("end")),
+      C-e: { with_mark: end }
+      # C("Alt-e"): C("C-e"),
+      M-e: C-e
+      # # Page up/down
+      # # Beginning/End of file
+      # C("C-Alt-comma"): with_mark(C("C-home")),
+      C-M-comma: { with_mark: C-home }
+      # C("C-Alt-dot"): with_mark(C("C-end")),
+      C-M-dot: { with_mark: C-end }
+
+      # # Copy
+      # C-w: [C-x, { set_mark: false }]
+      # M-w: [C-c, { set_mark: false }]
+      M-x: [C-x, { set_mark: false }]
+      M-c: [C-c, { set_mark: false }]
+      M-v: [C-v, { set_mark: false }]
+      # # Delete
+      C-d: [delete, { set_mark: false }]
+      M-d: [C-delete, { set_mark: false }]
+      # # Kill line
+      C-k: [Shift-end, C-x, { set_mark: false }]
+      # # Kill word backward
+      # Alt-backspace: [C-backspace, {set_mark: false}]
+      # # set mark next word continuously.
+      # C-M-space: [C-Shift-right, {set_mark: true}]
+      # # Undo
+      M-z: C-z
+      # C-slash: [C-z, { set_mark: false }]
+      # C-Shift-ro: C-z
+      # # Mark
+      C-space: { set_mark: true }
+      # # Search
+      M-f: C-f
+      M-g: C-g
+      # # Cancel
+      C-g: [esc, { set_mark: false }]
+      # # C-x YYY
+      # C-x:
+      #   remap:
+      #     # C-x h (select all)
+      #     h: [C-home, C-a, { set_mark: true }]
+      #     # C-x C-f (open)
+      #     C-f: C-o
+      #     # C-x C-s (save)
+      #     C-s: C-s
+      #     # C-x k (kill tab)
+      #     k: C-f4
+      #     # C-x C-c (exit)
+      #     C-c: C-q
+      #     # C-x u (undo)
+      #     u: [C-z, { set_mark: false }]
