@@ -1,8 +1,10 @@
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
 SYMDIR="$(cd $(dirname "$(readlink "${BASH_SOURCE[0]}")") && pwd)"
 
+if which mise > /dev/null; then eval "$(mise activate bash)"; fi
+
 export PATH=$SYMDIR/bin:$PATH
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export TERM=ansi
 export CLICOLOR=1
@@ -33,7 +35,7 @@ export NVM_DIR="$HOME/.nvm"
 export HISTSIZE=2222
 export HISTFILESIZE=999999
 export HISTTIMEFORMAT="%Y%m%d-%T "
-export HISTIGNORE="&:pwd:ls:[bf]g:exit:[ \t]*"
+export HISTIGNORE="&:pwd:ls:[bf]g:exit:[ ]*"
 export HISTCONTROL=ignoreboth
 shopt -s cmdhist
 shopt -s histappend
@@ -54,60 +56,80 @@ function hs {
     grep $1 $HISTFILE
 }
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # for the git_ps1 prompt thing below
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-    # GIT_PROMPT_THEME=Default
+    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
 
-    # Set config variables first
     GIT_PROMPT_ONLY_IN_REPO=0
 
     GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
 
-    # GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
     GIT_PROMPT_SHOW_UNTRACKED_FILES=no # can be no, normal or all; determines counting of untracked files
-
-    # GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
-
-    # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
-    # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
-
-    # as last entry source the gitprompt script
-    # GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
-    # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
-    # GIT_PROMPT_THEME=Default
 
     Time12a="\$(date +%H:%M)"
     PathShort="\w"
-    GIT_PROMPT_START_USER="${Yellow}${PathShort}${White} (${Red}\$(__rbenv_ps1)${White})"
-    #GIT_PROMPT_END_USER="${GIT_PROMPT_END} ${White}${ResetColor} ${PathShort} $ "
-    # GIT_PROMPT_END="${GIT_PROMPT_END} ${White}${ResetColor} ${PathShort} $ "
+    GIT_PROMPT_START_USER="${Yellow}${PathShort}${White} ${IBlack}(\$(__mise_ps1)${IBlack})${Color_Off}"
 
-    . "$HOME/.bash-git-prompt/gitprompt.sh"
+    source "$HOME/.bash-git-prompt/gitprompt.sh"
 fi
 
 
-# prompt with ruby version
-# rbenv version | sed -e 's/ .*//'
-__rbenv_ps1 ()
-{
-    rbenv_ruby_version=`rbenv version | sed -e 's/ .*//'`
-    printf $rbenv_ruby_version
+__mise_ps1() {
+    # Theme colors
+    local COLOR_RESET="${Color_Off}"
+    local COLOR_DEFAULT="${IBlack}"   # grey
+
+    local Black='\e[0;30m'        # Black
+    local Red='\e[0;31m'          # Red
+    local Green='\e[0;32m'        # Green
+    local Yellow='\e[0;33m'       # Yellow
+    local Blue='\e[0;34m'         # Blue
+    local Purple='\e[0;35m'       # Purple
+    local Cyan='\e[0;36m'         # Cyan
+    local White='\e[0;37m'        # White
+
+    declare -A TOOL_COLORS=(
+        [python]="${Purple}"
+        [ruby]="${Red}"
+        [node]="${Green}"
+    )
+
+    # Build the raw string (tool@version or ✖)
+    local raw
+    raw=$(mise ls --json | jq -r '
+    to_entries
+    | map(
+        .key + "@" +
+        ( [ .value[] | select(.active) | .version ] | first // "✖")
+      )
+    | join("|")
+  ')
+
+    local out=""
+    local IFS="|"
+    for item in $raw; do
+        local tool="${item%@*}"
+        local version="${item#*@}"
+        local color="${TOOL_COLORS[$tool]:-$COLOR_DEFAULT}"
+        out+="${color}${tool}@${version}${COLOR_RESET}${IBlack} | "
+    done
+
+    # Trim trailing " | "
+
+    printf "${out% | }"
 }
 
 
-# OLD custom bash prompt, keeping for posterity
-#export PS1="\w $ "
-#export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] "'$(__git_ps1 "\[\033[0;36m\][%s]\[\033[0m\]")'" \w/$ "
-#export PS1="\h| \[\033[0;32m\](\$(__rbenv_ps1))\[\033[0m\] \w/$ "
+export PATH="$HOME/.local/share/mise/shims:/opt/homebrew/bin:$HOME/.local/bin:$HOME/.tfenv/bin:$HOME/go/bin:$PATH"
 
-
-export PATH="$HOME/.local/bin:$HOME/.tfenv/bin:$HOME/go/bin:$PATH"
+# homebrew path setup
+[ -e /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 [ -e $SYMDIR/.doxrc.sh ] && source $SYMDIR/.doxrc.sh
 
 [ -e $SYMDIR/.finorc.sh ] && source $SYMDIR/.finorc.sh
-
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
-
-if [ -e /home/jgran/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jgran/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# [Certiv Scout CA merge v2]
+[ -r "/Library/Application Support/ai.certiv.scout/ca-merge.sh" ] && . "/Library/Application Support/ai.certiv.scout/ca-merge.sh"
+# [/Certiv Scout CA merge v2]
