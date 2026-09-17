@@ -100,6 +100,7 @@ __mise_ps1() {
     local raw
     raw=$(mise ls --json | jq -r '
     to_entries
+    | map(select(.value | any(has("source"))))
     | map(
         .key + "@" +
         ( [ .value[] | select(.active) | .version ] | first // "✖")
